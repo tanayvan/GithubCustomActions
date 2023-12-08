@@ -12,6 +12,4 @@ inputs:
 runs:
   using: 'docker'
   image: 'alpine:latest'
-  entrypoint: /bin/sh
-  commands:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  entrypoint: /entrypoint.sh
