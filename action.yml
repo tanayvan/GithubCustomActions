@@ -1,17 +1,22 @@
-name: 'Docker Login Action'
-description: 'Logs in to Docker Hub'
+name: 'Google Cloud SDK LOGIN AND CONFIGURING GCR'
+description: 'Logs in to Gcp and configure GCR'
 
 inputs:
-  username:
-    description: 'Docker Hub username'
-    required: true
-  password:
-    description: 'Docker Hub password'
+  gcloud_service_key:
+    description: 'Google Cloud service account key'
     required: true
 
 runs:
   using: "composite"
   steps:
-    - run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        project_id: project-1-400619
+        service_account_key: ${{ inputs.gcloud_service_key }}
+        install_components: "gke-gcloud-auth-plugin"
+        export_default_credentials: true
+
+    - name: Configure docker for GCP
+      run: gcloud auth configure-docker gcr.io
       shell: bash
-  
