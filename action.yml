@@ -14,6 +14,11 @@ inputs:
     description: 'DockerHub password'
     required: true
 
+outputs:
+  time: 
+    description: 'The time we greeted you'
+    value: ${{ steps.time.outputs.time }}
+  
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
