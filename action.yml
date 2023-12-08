@@ -20,7 +20,7 @@ outputs:
     value: ${{ steps.time.outputs.time }}
   
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
 container:
   image: docker:latest
