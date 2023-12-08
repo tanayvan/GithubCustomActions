@@ -10,6 +10,8 @@ inputs:
     required: true
 
 runs:
-  using: 'docker'
-  image: 'docker://alpine:latest'
-  entrypoint: ./entrypoint.sh
+  using: "composite"
+  steps:
+    - run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      shell: bash
+  
